@@ -6,6 +6,7 @@ public class mainCharacter : MonoBehaviour {
 
 	public int xVelocity, yJump;
 	public Rigidbody r;
+	bool jump;
 
 	// Use this for initialization
 	void Start () {
@@ -16,15 +17,21 @@ public class mainCharacter : MonoBehaviour {
 	void Update () {
 		float horizontal = Input.GetAxis ("Horizontal");
 		float vertical = Input.GetAxis ("Vertical");
-		float jump = Input.GetAxis ("Jump");
 		transform.Translate (horizontal * xVelocity * Time.deltaTime, 0, 0,Space.World);
 
 		if(Input.GetKeyDown(KeyCode.UpArrow)){
-			r.AddRelativeForce(0, yJump, 0, ForceMode.Impulse);
+			if (jump) {
+				r.AddRelativeForce (0, yJump, 0, ForceMode.Impulse);
+				jump = false;
+			}
 		}
 	}
 
 	void OnCollisionEnter(Collision c){
 		Debug.Log("with "+c.gameObject.name);
+
+		if (c.gameObject.name [0] == 'F') {
+			jump = true;
+		}
 	}
 }
