@@ -8,7 +8,10 @@ public class mainCharacter : MonoBehaviour {
 	Rigidbody r;
 	bool jump,grab, grabavb;
 	GameObject item;
+	public GameObject laserShot;
 	int side;
+
+	int fps=0;
 	// Use this for initialization
 	void Start () {
 		r = GetComponent<Rigidbody> ();
@@ -48,6 +51,18 @@ public class mainCharacter : MonoBehaviour {
 		}
 	}
 
+	void FixedUpdate(){
+		fps++;
+		if(fps%45==0){
+			Debug.Log("RUN "+fps);
+			if (fps % 90 == 0) {
+				laserShot.active = true;
+			} else {
+				laserShot.active = false;
+			}
+		}
+	}
+
 	void OnCollisionEnter(Collision c){
 		if (c.gameObject.name [0] == 'F') {
 			jump = true;
@@ -63,6 +78,10 @@ public class mainCharacter : MonoBehaviour {
 			grabavb = true;
 			item = c.gameObject;
 		}
+
+		if(c.gameObject.name=="laserShot"){
+			die();
+		}
 	}
 
 	void OnCollisionExit(Collision c){
@@ -72,5 +91,9 @@ public class mainCharacter : MonoBehaviour {
 		if (c.gameObject.name == "Flag") {
 			grabavb = false;
 		}
+	}
+
+	void die(){
+		this.transform.position = new Vector3 (-37,2,0);
 	}
 }
