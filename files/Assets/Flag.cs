@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Flag : MonoBehaviour {
 	
-	public GameObject wall;
+	public GameObject wall,redCube,blueCube,greenCube;
+	public int color;
 	// Use this for initialization
 	void Start () {
 		
@@ -19,6 +20,19 @@ public class Flag : MonoBehaviour {
 		if (c.gameObject.name == "endpoint") {
 			Destroy (gameObject);
 			Destroy (wall);
+		}
+		//Debug.Log(this.gameObject.name+": "+c.gameObject.name);
+		if(this.gameObject.name=="redF" && c.gameObject.name=="endR"){
+			Destroy(redCube);
+			if(++mainCharacter.progress==3) Debug.Log("YOU WON!");
+		}
+		else if(this.gameObject.name=="blueF" && c.gameObject.name=="endB"){
+			Destroy(blueCube);
+			if(++mainCharacter.progress==3) Debug.Log("YOU WON!");
+		}
+		else if(this.gameObject.name=="greenF" && c.gameObject.name=="endG"){
+			Destroy(greenCube);
+			if(++mainCharacter.progress==3) Debug.Log("YOU WON!");
 		}
 	}
 }

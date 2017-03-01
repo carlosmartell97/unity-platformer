@@ -7,7 +7,7 @@ public class mainCharacter : MonoBehaviour {
 	Rigidbody r;
 	bool jump,grab, grabavb;
 	GameObject item;
-	public GameObject laserShot;
+	public GameObject laserShot,platformUp,platformFront;
 	CharacterController controller;
 	int side;
 	float vertVel=7;
@@ -16,6 +16,9 @@ public class mainCharacter : MonoBehaviour {
 	public float gravity = 20.0F;
 	private Vector3 moveDirection = Vector3.zero;
 	int fps=0;
+	int platformUpPosition=-5; int platformUpwardsDirection=1;
+	int platformFrontPosition=-4; int platformFrontDirection=-1;
+	public static int progress=0;
 	// Use this for initialization
 	void Start () {
 		r = GetComponent<Rigidbody> ();
@@ -45,7 +48,7 @@ public class mainCharacter : MonoBehaviour {
 
 		if (Input.GetKeyDown (KeyCode.E)) {
 			if (grabavb) {
-				Debug.Log ("e");
+				//Debug.Log ("e");
 				grab = true;
 			}
 		}
@@ -61,8 +64,29 @@ public class mainCharacter : MonoBehaviour {
 
 	void FixedUpdate(){
 		fps++;
+		if (fps % 5 == 0) {
+			if (platformUpPosition > 21) {
+				platformUpwardsDirection *= -1;
+			} else if (platformUpPosition< -5) {
+				platformUpwardsDirection *= -1;
+			}
+			platformUpPosition+= platformUpwardsDirection;
+		}
+		Vector3 upwards = new Vector3 (232,platformUpPosition,0);
+		platformUp.transform.position = upwards;
+		if(fps%6==0){	
+			if (platformFrontPosition > 0) {
+				platformFrontDirection *= -1;
+			} else if (platformFrontPosition < -3) {
+				platformFrontDirection *= -1;
+			}
+			platformFrontPosition+=platformFrontDirection;
+		}
+		Vector3 frontBack= new Vector3(245,2,platformFrontPosition);
+		platformFront.transform.position = frontBack;
+
 		if(fps%45==0){
-			Debug.Log("RUN "+fps);
+			//Debug.Log("RUN "+fps);
 			if (fps % 90 == 0) {
 				laserShot.active = true;
 			} else {
@@ -72,7 +96,7 @@ public class mainCharacter : MonoBehaviour {
 	}
 
 	void OnControllerColliderHit(ControllerColliderHit c){
-		Debug.Log (c.gameObject.name);
+		//Debug.Log (c.gameObject.name);
 		if (c.gameObject.name == "Box") {
 			grabavb = true;
 			item = c.gameObject;
