@@ -4,41 +4,49 @@ using UnityEngine;
 
 public class mainCharacter : MonoBehaviour {
 
-	public int xVelocity, yJump;
 	Rigidbody r;
 	bool jump,grab, grabavb;
 	GameObject item;
 	public GameObject laserShot;
+	CharacterController controller;
 	int side;
-
+	float vertVel=7;
+	public float speed = 6.0F;
+	public float jumpSpeed = 20.0F;
+	public float gravity = 20.0F;
+	private Vector3 moveDirection = Vector3.zero;
 	int fps=0;
 	// Use this for initialization
 	void Start () {
 		r = GetComponent<Rigidbody> ();
+		controller = GetComponent<CharacterController>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		float horizontal = Input.GetAxis ("Horizontal");
-		transform.Translate (horizontal * xVelocity * Time.deltaTime, 0, 0,Space.World);
-
-		if (horizontal > 0) {
+		if (Input.GetAxis ("Horizontal") > 0) {
 			side = 1;
-		}else if (horizontal < 0) {
+		}else if(Input.GetAxis ("Horizontal") < 0){
 			side = -1;
 		}
 
-		if(Input.GetKeyDown(KeyCode.W)){
-			if (jump) {
-				r.AddRelativeForce (0, yJump, 0, ForceMode.Impulse);
-				jump = false;
-			}
+		moveDirection = new Vector3 (Input.GetAxis ("Horizontal"), 0, 0);
+		moveDirection = transform.TransformDirection (moveDirection);
+		moveDirection *= speed;
+
+		if (controller.isGrounded) {
+			if (Input.GetButton ("Jump"))
+				vertVel = jumpSpeed;
 		}
+		vertVel -= gravity * Time.deltaTime;
+		moveDirection.y = vertVel;
+		controller.Move(moveDirection * Time.deltaTime);
+		transform.position = new Vector3(transform.position.x, transform.position.y, 0);
+
 		if (Input.GetKeyDown (KeyCode.E)) {
-			Debug.Log ("e");
 			if (grabavb) {
+				Debug.Log ("e");
 				grab = true;
-				Debug.Log (grab);
 			}
 		}
 
@@ -63,15 +71,11 @@ public class mainCharacter : MonoBehaviour {
 		}
 	}
 
-	void OnCollisionEnter(Collision c){
-		if (c.gameObject.name [0] == 'F') {
-			jump = true;
-		}
-			
+	void OnControllerColliderHit(ControllerColliderHit c){
+		Debug.Log (c.gameObject.name);
 		if (c.gameObject.name == "Box") {
 			grabavb = true;
 			item = c.gameObject;
-			jump = true;
 		}
 
 		if (c.gameObject.name == "Flag") {
