@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Flag : MonoBehaviour {
-
+	
+	public GameObject wall;
 	// Use this for initialization
 	void Start () {
 		
@@ -17,6 +18,7 @@ public class Flag : MonoBehaviour {
 	void OnTriggerEnter(Collider c){
 		if (c.gameObject.name == "endpoint") {
 			Destroy (gameObject);
+			Destroy (wall);
 		}
 	}
 }

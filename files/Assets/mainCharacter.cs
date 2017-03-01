@@ -51,7 +51,7 @@ public class mainCharacter : MonoBehaviour {
 		}
 
 		if (grab) {
-			item.transform.position = new Vector3(transform.position.x+(2*side),transform.position.y+1,transform.position.z);
+			item.transform.position = new Vector3(transform.position.x+(2*side),transform.position.y+2,transform.position.z);
 		}
 
 		if (Input.GetKeyDown (KeyCode.R)) {
@@ -78,7 +78,7 @@ public class mainCharacter : MonoBehaviour {
 			item = c.gameObject;
 		}
 
-		if (c.gameObject.name == "Flag") {
+		if (c.gameObject.name == "Flag" || c.gameObject.name == "redF" || c.gameObject.name == "blueF" || c.gameObject.name == "greenF") {
 			grabavb = true;
 			item = c.gameObject;
 		}
