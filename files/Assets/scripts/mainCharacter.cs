@@ -19,6 +19,9 @@ public class mainCharacter : MonoBehaviour {
 	int platformUpPosition=-5; int platformUpwardsDirection=1;
 	int platformFrontPosition=-4; int platformFrontDirection=-1;
 	public static int progress=0;
+	public GameObject enemy;
+	public int enemyDistanceTreshold;
+
 	// Use this for initialization
 	void Start () {
 		r = GetComponent<Rigidbody> ();
@@ -59,6 +62,21 @@ public class mainCharacter : MonoBehaviour {
 
 		if (Input.GetKeyDown (KeyCode.R)) {
 			grab = false;
+		}
+
+		float distance = Vector3.Distance(this.transform.position,enemy.transform.position);
+		if (distance < enemyDistanceTreshold) {
+			// current = current.ApplySymbol(cerca)
+			enemy.GetComponent<Enemy>().current = 
+				enemy.GetComponent<Enemy>().current.ApplySymbol(
+					enemy.GetComponent<Enemy>().cerca
+				);
+		} else {
+			// current = current.ApplySymbol(lejos)
+			enemy.GetComponent<Enemy>().current = 
+				enemy.GetComponent<Enemy>().current.ApplySymbol(
+					enemy.GetComponent<Enemy>().lejos
+				);
 		}
 	}
 
@@ -123,5 +141,9 @@ public class mainCharacter : MonoBehaviour {
 
 	void die(){
 		this.transform.position = new Vector3 (-37,2,0);
+	}
+
+	void OnTriggerEnter( Collider c){
+		Debug.Log(c.gameObject.name);
 	}
 }

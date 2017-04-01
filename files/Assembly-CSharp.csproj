@@ -46,9 +46,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Flag.cs" />
-     <Compile Include="Assets\camera.cs" />
-     <Compile Include="Assets\mainCharacter.cs" />
+     <Compile Include="Assets\scripts\Enemy.cs" />
+     <Compile Include="Assets\scripts\Flag.cs" />
+     <Compile Include="Assets\scripts\Node.cs" />
+     <Compile Include="Assets\scripts\Pathfinding.cs" />
+     <Compile Include="Assets\scripts\State.cs" />
+     <Compile Include="Assets\scripts\Symbol.cs" />
+     <Compile Include="Assets\scripts\camera.cs" />
+     <Compile Include="Assets\scripts\mainCharacter.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
