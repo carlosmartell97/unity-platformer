@@ -18,7 +18,7 @@ public class Flag : MonoBehaviour {
 
 	void OnTriggerEnter(Collider c){
 		if (c.gameObject.name == "endpoint") {
-			Destroy (gameObject);
+			//Destroy (gameObject);
 			Destroy (wall);
 		}
 		//Debug.Log(this.gameObject.name+": "+c.gameObject.name);

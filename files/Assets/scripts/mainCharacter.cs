@@ -5,8 +5,9 @@ using UnityEngine;
 public class mainCharacter : MonoBehaviour {
 
 	Rigidbody r;
-	bool jump,grab, grabavb;
-	GameObject item;
+	public bool grab;
+	bool jump, grabavb;
+	public GameObject item=null;
 	public GameObject laserShot,platformUp,platformFront;
 	CharacterController controller;
 	int side;
@@ -21,6 +22,7 @@ public class mainCharacter : MonoBehaviour {
 	public static int progress=0;
 	public GameObject enemy;
 	public int enemyDistanceTreshold;
+	public Node characterOnNode;
 
 	// Use this for initialization
 	void Start () {
@@ -56,27 +58,38 @@ public class mainCharacter : MonoBehaviour {
 			}
 		}
 
-		if (grab) {
-			item.transform.position = new Vector3(transform.position.x+(2*side),transform.position.y+2,transform.position.z);
+		if(item!=null){
+			float distanceToItem = Vector3.Distance(this.transform.position,item.transform.position);
+			if (Input.GetKeyDown (KeyCode.R) || distanceToItem>5) {
+				grab = false;
+				item = null;
+			}
 		}
 
-		if (Input.GetKeyDown (KeyCode.R)) {
-			grab = false;
+		if (grab && item!=null) {
+			item.transform.position = new Vector3(transform.position.x+(2*side),transform.position.y+2,transform.position.z);
+			if(item!=null && item.name=="Flag"){
+				// current = current.ApplaySymbol(cubecarried)
+				GameObject.Find ("Enemy").GetComponent<Enemy> ().current = 
+					GameObject.Find ("Enemy").GetComponent<Enemy> ().current.ApplySymbol (
+						GameObject.Find ("Enemy").GetComponent<Enemy> ().cubeCarried
+					);
+			}
 		}
 
 		float distance = Vector3.Distance(this.transform.position,enemy.transform.position);
 		if (distance < enemyDistanceTreshold) {
 			// current = current.ApplySymbol(cerca)
-			enemy.GetComponent<Enemy>().current = 
+			/*enemy.GetComponent<Enemy>().current = 
 				enemy.GetComponent<Enemy>().current.ApplySymbol(
 					enemy.GetComponent<Enemy>().cerca
-				);
+				);*/
 		} else {
 			// current = current.ApplySymbol(lejos)
-			enemy.GetComponent<Enemy>().current = 
+			/*enemy.GetComponent<Enemy>().current = 
 				enemy.GetComponent<Enemy>().current.ApplySymbol(
 					enemy.GetComponent<Enemy>().lejos
-				);
+				);*/
 		}
 	}
 
@@ -115,14 +128,15 @@ public class mainCharacter : MonoBehaviour {
 
 	void OnControllerColliderHit(ControllerColliderHit c){
 		//Debug.Log (c.gameObject.name);
-		if (c.gameObject.name == "Box") {
+		if (item==null && c.gameObject.name == "Box") {
 			grabavb = true;
 			item = c.gameObject;
 		}
 
-		if (c.gameObject.name == "Flag" || c.gameObject.name == "redF" || c.gameObject.name == "blueF" || c.gameObject.name == "greenF") {
+		if (item==null && (c.gameObject.name == "Flag" || c.gameObject.name == "redF" || c.gameObject.name == "blueF" || c.gameObject.name == "greenF")) {
 			grabavb = true;
 			item = c.gameObject;
+			GameObject.Find ("Enemy").GetComponent<Enemy> ().target = c.gameObject;
 		}
 
 		if(c.gameObject.name=="laserShot"){
@@ -144,6 +158,12 @@ public class mainCharacter : MonoBehaviour {
 	}
 
 	void OnTriggerEnter( Collider c){
-		Debug.Log(c.gameObject.name);
+		//Debug.Log(c.gameObject.name);
+		if(c.gameObject.layer==8){
+			characterOnNode = GameObject.Find (c.gameObject.name).GetComponent<Node> ();
+		}
+		if (c.gameObject.name == "deathZone") {
+			die();
+		}
 	}
 }

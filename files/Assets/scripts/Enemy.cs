@@ -4,38 +4,127 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour {
 
-	public List<Transform> path;
+	public List<Node> path;
 	public int currentNode;
+	public Node standByNode;
 	public float treshold, speed;
 
-	public Symbol cerca, lejos;
+	public Symbol cubeCarried, cubeReached, cubeInPosition;
 	public State current;
+	Node mostRecentNode;
+
+	public GameObject target;
+
+	public Material red, green, blue;
+	private Renderer ren;
 
 	// Use this for initialization
 	void Start () {
-		cerca = new Symbol("cerca");
-		lejos = new Symbol("lejos");
+		ren = GetComponent<Renderer>();
 
-		State standBy = new State("standby");
-		State attack = new State("attack");
+		cubeCarried = new Symbol("cubeCarried");
+		cubeReached = new Symbol("cubeReached");
+		cubeInPosition = new Symbol("cubeInPosition");
 
-		attack.AddNeighbor(cerca,attack);
-		attack.AddNeighbor(lejos,standBy);
+		State standBy = new State("standBy");
+		State chasingCube = new State("chasingCube");
+		State retrievingCube = new State("retrievingCube");
 
-		standBy.AddNeighbor(lejos,standBy);
-		standBy.AddNeighbor(cerca,attack);
+		standBy.AddNeighbor(cubeCarried,chasingCube);
+		standBy.AddNeighbor(cubeInPosition,standBy);
+		standBy.AddNeighbor(cubeReached,standBy);
+
+		chasingCube.AddNeighbor(cubeReached,retrievingCube);
+		chasingCube.AddNeighbor(cubeCarried,chasingCube);
+		chasingCube.AddNeighbor(cubeInPosition,chasingCube);
+
+		retrievingCube.AddNeighbor(cubeInPosition,standBy);
+		retrievingCube.AddNeighbor(cubeReached,retrievingCube);
+		retrievingCube.AddNeighbor(cubeCarried,retrievingCube);
 
 		current = standBy;
+		mostRecentNode = standByNode;
+		path.Add(standByNode);
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if(current.Name=="attack"){
-			this.transform.LookAt(path[currentNode].transform.position);
-			this.transform.Translate(transform.forward*speed,Space.World);
+		if(current.Name=="standBy"){
+			ren.material = green;
+			currentNode = 0;
+			mostRecentNode = standByNode;
+			//this.transform.position = standByNode.transform.position;
 		}
-		else if(current.Name=="standBy"){
+		else if(current.Name=="chasingCube"){
+			ren.material = red;
+			Node characterOnNode = GameObject.Find ("Character").GetComponent<mainCharacter> ().characterOnNode;
+			//Debug.Log("character:"+characterOnNode.name+" me:"+mostRecentNode.name);
+			if (mostRecentNode == characterOnNode) {
+				this.transform.LookAt (target.transform.position);
+				this.transform.Translate (transform.forward * speed, Space.World);
+			} else {
+				path = Pathfinding.aStar(mostRecentNode,characterOnNode);
+				//Debug.Log("PATH:");
+				for(int i=0; i<path.Count; i++){
+					//Debug.Log("->"+path[i].name+" ");
+				}
+				this.transform.LookAt (path [currentNode].transform.position);
+				this.transform.Translate(transform.forward*speed,Space.World);
+				float distance = Vector3.Distance(this.transform.position,path[currentNode].transform.position);
+				Debug.Log("d:"+distance);
+				if(distance<treshold){
+					if(currentNode!=path.Count-1){
+						currentNode++;
+					}
+				}
+			}
+		}
+		else if(current.Name=="retrievingCube"){
+			ren.material = blue;
+			//Debug.Log("p:"+path.Count+" cur:"+currentNode);
+			target.transform.position = new Vector3(transform.position.x+(2*2),transform.position.y+2,transform.position.z);
+			path = Pathfinding.aStar(mostRecentNode,standByNode);
+			for(int i=0; i<path.Count; i++){
+				//Debug.Log("->"+path[i]+" ");
+			}
+			this.transform.LookAt (path [currentNode].transform.position);
+			this.transform.Translate(transform.forward*speed,Space.World);
+			float distance = Vector3.Distance(this.transform.position,path[currentNode].transform.position);
+			if(distance<treshold){
+				if(currentNode!=path.Count-1){
+					currentNode++;
+				}
+			}
+		}
+	}
 
+	void OnCollisionEnter(Collision c){
+		if(target!=null && c.gameObject.name==target.gameObject.name){
+			//Debug.Log("enemy with "+c.gameObject.name);
+
+			// mainCharacter.grab = false
+			GameObject.Find("Character").GetComponent<mainCharacter>().grab = false;
+			// mainCharacter.item = null
+			GameObject.Find("Character").GetComponent<mainCharacter>().item = null;
+			current = current.ApplySymbol(cubeReached);
+			currentNode = 0;
+		}
+	}
+
+	void OnTriggerEnter(Collider c){
+		//Debug.Log("enemy on "+c.gameObject.name);
+		//Debug.Log (c.gameObject.layer);
+		if(current.Name=="retrievingCube" && c.gameObject.layer==8){
+			//Debug.Log("c:"+c.gameObject.name+" sb:"+standByNode.gameObject.name);
+			if(c.gameObject.name==standByNode.name){
+				current = current.ApplySymbol(cubeInPosition);
+				path = new List<Node>();
+				path.Add(standByNode);
+			}
+		}
+		else if(current.Name=="chasingCube" && c.gameObject.layer==8){
+			mostRecentNode = GameObject.Find (c.gameObject.name).GetComponent<Node> ();
+			//currentNode = 0;
 		}
 	}
 }
