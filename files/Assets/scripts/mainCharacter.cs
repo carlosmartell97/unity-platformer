@@ -74,6 +74,8 @@ public class mainCharacter : MonoBehaviour {
 					GameObject.Find ("Enemy").GetComponent<Enemy> ().current.ApplySymbol (
 						GameObject.Find ("Enemy").GetComponent<Enemy> ().cubeCarried
 					);
+				// showEnemyWarning = true
+				GameObject.Find("Enemy").GetComponent<Enemy>().showEnemyWarning = true;
 			}
 		}
 

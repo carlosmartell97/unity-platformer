@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour {
 
@@ -17,6 +18,9 @@ public class Enemy : MonoBehaviour {
 
 	public Material red, green, blue;
 	private Renderer ren;
+
+	public Image enemyWarning;
+	public bool showEnemyWarning;
 
 	// Use this for initialization
 	void Start () {
@@ -45,16 +49,43 @@ public class Enemy : MonoBehaviour {
 		current = standBy;
 		mostRecentNode = standByNode;
 		path.Add(standByNode);
+
+		enemyWarning.enabled = false;
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		var v3 = Camera.main.WorldToScreenPoint (this.transform.position);
+		if (showEnemyWarning && (v3.x > Screen.width || v3.x < 0 || v3.y > Screen.height || v3.y < 0)) {
+			enemyWarning.enabled = true;
+		} else {
+			enemyWarning.enabled = false;
+		}
+		if(enemyWarning.enabled){
+			if (v3.x > Screen.width) {
+				v3.x = Screen.width-110;
+				enemyWarning.transform.rotation = Quaternion.Euler(new Vector3(0,0,90));
+			} else if(v3.x<0){
+				v3.x = 	90;
+				enemyWarning.transform.rotation = Quaternion.Euler(new Vector3(0,0,-90));
+			}
+			if (v3.y > Screen.height) {
+				v3.y = Screen.height-90;
+				enemyWarning.transform.rotation = Quaternion.Euler(new Vector3(0,0,180));
+			} else if(v3.y<0){
+				v3.y = 90;
+				enemyWarning.transform.rotation = Quaternion.Euler(new Vector3(0,0,0));
+			}
+			enemyWarning.transform.position = v3;
+		}
+
 		if(current.Name=="standBy"){
 			ren.material = green;
 			currentNode = 0;
 			mostRecentNode = standByNode;
 			//this.transform.position = standByNode.transform.position;
 		}
+
 		else if(current.Name=="chasingCube"){
 			ren.material = red;
 			Node characterOnNode = GameObject.Find ("Character").GetComponent<mainCharacter> ().characterOnNode;
@@ -71,13 +102,14 @@ public class Enemy : MonoBehaviour {
 				this.transform.LookAt (path [currentNode].transform.position);
 				this.transform.Translate(transform.forward*speed,Space.World);
 				float distance = Vector3.Distance(this.transform.position,path[currentNode].transform.position);
-				Debug.Log("d:"+distance);
+				//Debug.Log("d:"+distance);
 				if(distance<treshold){
 					if(currentNode!=path.Count-1){
 						currentNode++;
 					}
 				}
 			}
+
 		}
 		else if(current.Name=="retrievingCube"){
 			ren.material = blue;
@@ -107,6 +139,7 @@ public class Enemy : MonoBehaviour {
 			// mainCharacter.item = null
 			GameObject.Find("Character").GetComponent<mainCharacter>().item = null;
 			current = current.ApplySymbol(cubeReached);
+			showEnemyWarning = false;
 			currentNode = 0;
 		}
 	}
