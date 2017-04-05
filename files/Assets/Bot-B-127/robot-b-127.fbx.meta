@@ -1,0 +1,450 @@
+fileFormatVersion: 2
+guid: c535a382d244f4852bbb4a9360b09253
+timeCreated: 1474873131
+licenseType: Store
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: AllJoints
+    100002: armLeft
+    100004: armLeft2
+    100006: armLeft3
+    100008: armLeft4
+    100010: armRight
+    100012: armRight2
+    100014: armRight3
+    100016: armRight4
+    100018: HandLeft
+    100020: HandRight
+    100022: joint14
+    100024: joint15
+    100026: joint17
+    100028: joint18
+    100030: joint20
+    100032: joint21
+    100034: joint31
+    100036: joint32
+    100038: joint34
+    100040: joint35
+    100042: joint37
+    100044: joint38
+    100046: joint41
+    100048: joint42
+    100050: joint43
+    100052: joint46
+    100054: joint47
+    100056: joint48
+    100058: legLeft
+    100060: legRight
+    100062: //RootNode
+    100064: TopAntena
+    100066: TopAntena2
+    100068: TopAntena3
+    100070: TopAntena4
+    400000: AllJoints
+    400002: armLeft
+    400004: armLeft2
+    400006: armLeft3
+    400008: armLeft4
+    400010: armRight
+    400012: armRight2
+    400014: armRight3
+    400016: armRight4
+    400018: HandLeft
+    400020: HandRight
+    400022: joint14
+    400024: joint15
+    400026: joint17
+    400028: joint18
+    400030: joint20
+    400032: joint21
+    400034: joint31
+    400036: joint32
+    400038: joint34
+    400040: joint35
+    400042: joint37
+    400044: joint38
+    400046: joint41
+    400048: joint42
+    400050: joint43
+    400052: joint46
+    400054: joint47
+    400056: joint48
+    400058: legLeft
+    400060: legRight
+    400062: //RootNode
+    400064: TopAntena
+    400066: TopAntena2
+    400068: TopAntena3
+    400070: TopAntena4
+    4300000: robot
+    7400000: Idle
+    7400002: Walk
+    7400004: Fly
+    9500000: //RootNode
+    11100000: //RootNode
+    13700000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleRotations: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Idle
+      takeName: Take 001
+      firstFrame: 1
+      lastFrame: 23
+      wrapMode: 2
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: AllJoints
+        weight: 1
+      - path: AllJoints/armLeft
+        weight: 1
+      - path: AllJoints/armLeft/armLeft2
+        weight: 1
+      - path: AllJoints/armLeft/armLeft2/armLeft3
+        weight: 1
+      - path: AllJoints/armLeft/armLeft2/armLeft3/armLeft4
+        weight: 1
+      - path: AllJoints/armLeft/armLeft2/armLeft3/armLeft4/HandLeft
+        weight: 1
+      - path: AllJoints/armLeft/armLeft2/armLeft3/armLeft4/HandLeft/joint14
+        weight: 1
+      - path: AllJoints/armLeft/armLeft2/armLeft3/armLeft4/HandLeft/joint14/joint15
+        weight: 1
+      - path: AllJoints/armLeft/armLeft2/armLeft3/armLeft4/HandLeft/joint17
+        weight: 1
+      - path: AllJoints/armLeft/armLeft2/armLeft3/armLeft4/HandLeft/joint17/joint18
+        weight: 1
+      - path: AllJoints/armLeft/armLeft2/armLeft3/armLeft4/HandLeft/joint20
+        weight: 1
+      - path: AllJoints/armLeft/armLeft2/armLeft3/armLeft4/HandLeft/joint20/joint21
+        weight: 1
+      - path: AllJoints/armRight
+        weight: 1
+      - path: AllJoints/armRight/armRight2
+        weight: 1
+      - path: AllJoints/armRight/armRight2/armRight3
+        weight: 1
+      - path: AllJoints/armRight/armRight2/armRight3/armRight4
+        weight: 1
+      - path: AllJoints/armRight/armRight2/armRight3/armRight4/HandRight
+        weight: 1
+      - path: AllJoints/armRight/armRight2/armRight3/armRight4/HandRight/joint31
+        weight: 1
+      - path: AllJoints/armRight/armRight2/armRight3/armRight4/HandRight/joint31/joint32
+        weight: 1
+      - path: AllJoints/armRight/armRight2/armRight3/armRight4/HandRight/joint34
+        weight: 1
+      - path: AllJoints/armRight/armRight2/armRight3/armRight4/HandRight/joint34/joint35
+        weight: 1
+      - path: AllJoints/armRight/armRight2/armRight3/armRight4/HandRight/joint37
+        weight: 1
+      - path: AllJoints/armRight/armRight2/armRight3/armRight4/HandRight/joint37/joint38
+        weight: 1
+      - path: AllJoints/legLeft
+        weight: 1
+      - path: AllJoints/legLeft/joint41
+        weight: 1
+      - path: AllJoints/legLeft/joint41/joint42
+        weight: 1
+      - path: AllJoints/legLeft/joint41/joint42/joint43
+        weight: 1
+      - path: AllJoints/legRight
+        weight: 1
+      - path: AllJoints/legRight/joint46
+        weight: 1
+      - path: AllJoints/legRight/joint46/joint47
+        weight: 1
+      - path: AllJoints/legRight/joint46/joint47/joint48
+        weight: 1
+      - path: AllJoints/TopAntena
+        weight: 1
+      - path: AllJoints/TopAntena/TopAntena2
+        weight: 1
+      - path: AllJoints/TopAntena/TopAntena2/TopAntena3
+        weight: 1
+      - path: AllJoints/TopAntena/TopAntena2/TopAntena3/TopAntena4
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Walk
+      takeName: Take 001
+      firstFrame: 25
+      lastFrame: 46
+      wrapMode: 2
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 1
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: AllJoints
+        weight: 1
+      - path: AllJoints/armLeft
+        weight: 1
+      - path: AllJoints/armLeft/armLeft2
+        weight: 1
+      - path: AllJoints/armLeft/armLeft2/armLeft3
+        weight: 1
+      - path: AllJoints/armLeft/armLeft2/armLeft3/armLeft4
+        weight: 1
+      - path: AllJoints/armLeft/armLeft2/armLeft3/armLeft4/HandLeft
+        weight: 1
+      - path: AllJoints/armLeft/armLeft2/armLeft3/armLeft4/HandLeft/joint14
+        weight: 1
+      - path: AllJoints/armLeft/armLeft2/armLeft3/armLeft4/HandLeft/joint14/joint15
+        weight: 1
+      - path: AllJoints/armLeft/armLeft2/armLeft3/armLeft4/HandLeft/joint17
+        weight: 1
+      - path: AllJoints/armLeft/armLeft2/armLeft3/armLeft4/HandLeft/joint17/joint18
+        weight: 1
+      - path: AllJoints/armLeft/armLeft2/armLeft3/armLeft4/HandLeft/joint20
+        weight: 1
+      - path: AllJoints/armLeft/armLeft2/armLeft3/armLeft4/HandLeft/joint20/joint21
+        weight: 1
+      - path: AllJoints/armRight
+        weight: 1
+      - path: AllJoints/armRight/armRight2
+        weight: 1
+      - path: AllJoints/armRight/armRight2/armRight3
+        weight: 1
+      - path: AllJoints/armRight/armRight2/armRight3/armRight4
+        weight: 1
+      - path: AllJoints/armRight/armRight2/armRight3/armRight4/HandRight
+        weight: 1
+      - path: AllJoints/armRight/armRight2/armRight3/armRight4/HandRight/joint31
+        weight: 1
+      - path: AllJoints/armRight/armRight2/armRight3/armRight4/HandRight/joint31/joint32
+        weight: 1
+      - path: AllJoints/armRight/armRight2/armRight3/armRight4/HandRight/joint34
+        weight: 1
+      - path: AllJoints/armRight/armRight2/armRight3/armRight4/HandRight/joint34/joint35
+        weight: 1
+      - path: AllJoints/armRight/armRight2/armRight3/armRight4/HandRight/joint37
+        weight: 1
+      - path: AllJoints/armRight/armRight2/armRight3/armRight4/HandRight/joint37/joint38
+        weight: 1
+      - path: AllJoints/legLeft
+        weight: 1
+      - path: AllJoints/legLeft/joint41
+        weight: 1
+      - path: AllJoints/legLeft/joint41/joint42
+        weight: 1
+      - path: AllJoints/legLeft/joint41/joint42/joint43
+        weight: 1
+      - path: AllJoints/legRight
+        weight: 1
+      - path: AllJoints/legRight/joint46
+        weight: 1
+      - path: AllJoints/legRight/joint46/joint47
+        weight: 1
+      - path: AllJoints/legRight/joint46/joint47/joint48
+        weight: 1
+      - path: AllJoints/TopAntena
+        weight: 1
+      - path: AllJoints/TopAntena/TopAntena2
+        weight: 1
+      - path: AllJoints/TopAntena/TopAntena2/TopAntena3
+        weight: 1
+      - path: AllJoints/TopAntena/TopAntena2/TopAntena3/TopAntena4
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Fly
+      takeName: Take 001
+      firstFrame: 49
+      lastFrame: 60
+      wrapMode: 2
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 1
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: AllJoints
+        weight: 1
+      - path: AllJoints/armLeft
+        weight: 1
+      - path: AllJoints/armLeft/armLeft2
+        weight: 1
+      - path: AllJoints/armLeft/armLeft2/armLeft3
+        weight: 1
+      - path: AllJoints/armLeft/armLeft2/armLeft3/armLeft4
+        weight: 1
+      - path: AllJoints/armLeft/armLeft2/armLeft3/armLeft4/HandLeft
+        weight: 1
+      - path: AllJoints/armLeft/armLeft2/armLeft3/armLeft4/HandLeft/joint14
+        weight: 1
+      - path: AllJoints/armLeft/armLeft2/armLeft3/armLeft4/HandLeft/joint14/joint15
+        weight: 1
+      - path: AllJoints/armLeft/armLeft2/armLeft3/armLeft4/HandLeft/joint17
+        weight: 1
+      - path: AllJoints/armLeft/armLeft2/armLeft3/armLeft4/HandLeft/joint17/joint18
+        weight: 1
+      - path: AllJoints/armLeft/armLeft2/armLeft3/armLeft4/HandLeft/joint20
+        weight: 1
+      - path: AllJoints/armLeft/armLeft2/armLeft3/armLeft4/HandLeft/joint20/joint21
+        weight: 1
+      - path: AllJoints/armRight
+        weight: 1
+      - path: AllJoints/armRight/armRight2
+        weight: 1
+      - path: AllJoints/armRight/armRight2/armRight3
+        weight: 1
+      - path: AllJoints/armRight/armRight2/armRight3/armRight4
+        weight: 1
+      - path: AllJoints/armRight/armRight2/armRight3/armRight4/HandRight
+        weight: 1
+      - path: AllJoints/armRight/armRight2/armRight3/armRight4/HandRight/joint31
+        weight: 1
+      - path: AllJoints/armRight/armRight2/armRight3/armRight4/HandRight/joint31/joint32
+        weight: 1
+      - path: AllJoints/armRight/armRight2/armRight3/armRight4/HandRight/joint34
+        weight: 1
+      - path: AllJoints/armRight/armRight2/armRight3/armRight4/HandRight/joint34/joint35
+        weight: 1
+      - path: AllJoints/armRight/armRight2/armRight3/armRight4/HandRight/joint37
+        weight: 1
+      - path: AllJoints/armRight/armRight2/armRight3/armRight4/HandRight/joint37/joint38
+        weight: 1
+      - path: AllJoints/legLeft
+        weight: 1
+      - path: AllJoints/legLeft/joint41
+        weight: 1
+      - path: AllJoints/legLeft/joint41/joint42
+        weight: 1
+      - path: AllJoints/legLeft/joint41/joint42/joint43
+        weight: 1
+      - path: AllJoints/legRight
+        weight: 1
+      - path: AllJoints/legRight/joint46
+        weight: 1
+      - path: AllJoints/legRight/joint46/joint47
+        weight: 1
+      - path: AllJoints/legRight/joint46/joint47/joint48
+        weight: 1
+      - path: AllJoints/TopAntena
+        weight: 1
+      - path: AllJoints/TopAntena/TopAntena2
+        weight: 1
+      - path: AllJoints/TopAntena/TopAntena2/TopAntena3
+        weight: 1
+      - path: AllJoints/TopAntena/TopAntena2/TopAntena3/TopAntena4
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 10
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 180
+    normalImportMode: 1
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 1
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

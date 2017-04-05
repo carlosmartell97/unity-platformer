@@ -53,7 +53,11 @@
      <Compile Include="Assets\scripts\State.cs" />
      <Compile Include="Assets\scripts\Symbol.cs" />
      <Compile Include="Assets\scripts\camera.cs" />
+     <Compile Include="Assets\scripts\level1mov.cs" />
      <Compile Include="Assets\scripts\mainCharacter.cs" />
+     <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_BloomAndFlares\MobileBloom.shader" />
+     <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\ContrastComposite.shader" />
+     <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_DepthOfField\SeparableBlur.shader" />
  <Reference Include="UnityEngine.Advertisements">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Advertisements/UnityEngine.Advertisements.dll</HintPath>
  </Reference>

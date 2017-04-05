@@ -9,7 +9,7 @@ public class camera : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		offset = transform.position;
+		offset = transform.position-character.transform.position;
 	}
 	
 	// Update is called once per frame

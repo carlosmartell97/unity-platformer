@@ -16,15 +16,11 @@ public class Enemy : MonoBehaviour {
 
 	public GameObject target;
 
-	public Material red, green, blue;
-	private Renderer ren;
-
 	public Image enemyWarning;
 	public bool showEnemyWarning;
 
 	// Use this for initialization
 	void Start () {
-		ren = GetComponent<Renderer>();
 
 		cubeCarried = new Symbol("cubeCarried");
 		cubeReached = new Symbol("cubeReached");
@@ -80,14 +76,13 @@ public class Enemy : MonoBehaviour {
 		}
 
 		if(current.Name=="standBy"){
-			ren.material = green;
 			currentNode = 0;
 			mostRecentNode = standByNode;
 			//this.transform.position = standByNode.transform.position;
 		}
 
 		else if(current.Name=="chasingCube"){
-			ren.material = red;
+			speed=0.12f;
 			Node characterOnNode = GameObject.Find ("Character").GetComponent<mainCharacter> ().characterOnNode;
 			//Debug.Log("character:"+characterOnNode.name+" me:"+mostRecentNode.name);
 			if (mostRecentNode == characterOnNode) {
@@ -112,8 +107,8 @@ public class Enemy : MonoBehaviour {
 
 		}
 		else if(current.Name=="retrievingCube"){
-			ren.material = blue;
 			//Debug.Log("p:"+path.Count+" cur:"+currentNode);
+			speed=0.23f;
 			target.transform.position = new Vector3(transform.position.x+(2*2),transform.position.y+2,transform.position.z);
 			path = Pathfinding.aStar(mostRecentNode,standByNode);
 			for(int i=0; i<path.Count; i++){
@@ -156,7 +151,8 @@ public class Enemy : MonoBehaviour {
 			}
 		}
 		else if(current.Name=="chasingCube" && c.gameObject.layer==8){
-			mostRecentNode = GameObject.Find (c.gameObject.name).GetComponent<Node> ();
+			
+			mostRecentNode = c.gameObject.GetComponent(typeof(Node))as Node;
 			//currentNode = 0;
 		}
 	}
