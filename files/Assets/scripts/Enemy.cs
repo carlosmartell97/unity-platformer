@@ -19,9 +19,13 @@ public class Enemy : MonoBehaviour {
 	public Image enemyWarning;
 	public bool showEnemyWarning;
 
+	public AudioClip warning;
+	AudioSource source;
+	public float volume;
+	bool soundPlaying;
+
 	// Use this for initialization
 	void Start () {
-
 		cubeCarried = new Symbol("cubeCarried");
 		cubeReached = new Symbol("cubeReached");
 		cubeInPosition = new Symbol("cubeInPosition");
@@ -47,6 +51,9 @@ public class Enemy : MonoBehaviour {
 		path.Add(standByNode);
 
 		enemyWarning.enabled = false;
+
+		source = GetComponent<AudioSource>();
+		soundPlaying = false;
 	}
 	
 	// Update is called once per frame
@@ -82,6 +89,11 @@ public class Enemy : MonoBehaviour {
 		}
 
 		else if(current.Name=="chasingCube"){
+			if(!soundPlaying){
+				//source.PlayOneShot(sound,volume);
+				source.Play();
+				soundPlaying = true;
+			}
 			speed=0.12f;
 			Node characterOnNode = GameObject.Find ("Character").GetComponent<mainCharacter> ().characterOnNode;
 			//Debug.Log("character:"+characterOnNode.name+" me:"+mostRecentNode.name);
@@ -107,6 +119,8 @@ public class Enemy : MonoBehaviour {
 
 		}
 		else if(current.Name=="retrievingCube"){
+			source.Stop();
+			soundPlaying = false;
 			//Debug.Log("p:"+path.Count+" cur:"+currentNode);
 			speed=0.23f;
 			target.transform.position = new Vector3(transform.position.x+(2*2),transform.position.y+2,transform.position.z);

@@ -23,37 +23,62 @@ public class mainCharacter : MonoBehaviour {
 	public Node characterOnNode;
 	private float distance = 13.5f;
 
+	public AudioClip fire, steps;
+	AudioSource source;
+	public float volume;
+	bool firePlaying, stepsPlaying;
+
 	// Use this for initialization
 	void Start () {
 		controller = GetComponent<CharacterController>();
 		particle.GetComponent<Renderer>().enabled = false;
-
+		source = GetComponent<AudioSource>();
+		firePlaying = false;
 	}
 
 	// Update is called once per frame
 	void Update () {
-		if (!controller.isGrounded){
-			this.GetComponent<Animation>().CrossFade("Fly");
-			particle.GetComponent<Renderer>().enabled = true;
-		} else if (Input.GetAxis ("Horizontal") != 0 && controller.isGrounded) {
-			this.GetComponent<Animation>().CrossFade("Walk");
-			particle.GetComponent<Renderer>().enabled = false;
-		} else if (Input.GetAxis ("Horizontal")== 0 && controller.isGrounded)  {
-			this.GetComponent<Animation>().CrossFade("Idle");
-			particle.GetComponent<Renderer>().enabled = false;
+		if (!controller.isGrounded) {
+			this.GetComponent<Animation> ().CrossFade ("Fly");
+			particle.GetComponent<Renderer> ().enabled = true;
+			if(!firePlaying){
+				source.Stop();
+				source.PlayOneShot (fire, volume);
+				firePlaying = true;
+			}
+		} else {
+			//source.Stop ();
+			firePlaying = false;
+			if (Input.GetAxis ("Horizontal") != 0 && controller.isGrounded) {
+				this.GetComponent<Animation> ().CrossFade ("Walk");
+				particle.GetComponent<Renderer> ().enabled = false;
+				if(!stepsPlaying){
+					source.Stop();
+					source.PlayOneShot(steps, 9.1F);
+					stepsPlaying = true;
+				}
+				//Debug.Log("walking");
+			} else {
+				source.Stop();
+				stepsPlaying = false;
+				//Debug.Log("NOT");
+				if (Input.GetAxis ("Horizontal") == 0 && controller.isGrounded) {
+					this.GetComponent<Animation> ().CrossFade ("Idle");
+					particle.GetComponent<Renderer> ().enabled = false;
+				}
+			}
 		}
-		if (Input.GetAxis ("Horizontal") > 0 ) {
-			side = 1;
-			Quaternion rot = transform.localRotation;
- 			rot.eulerAngles = new Vector3 (0.0f, 180, 0.0f);
- 			transform.localRotation = rot;
-		}else if(Input.GetAxis ("Horizontal") < 0){
-			side = -1;
-			Quaternion rot = transform.localRotation;
-			rot.eulerAngles = new Vector3 (0.0f, 0, 0.0f);
-			transform.localRotation = rot;
-		}
-
+			if (Input.GetAxis ("Horizontal") > 0) {
+				side = 1;
+				Quaternion rot = transform.localRotation;
+				rot.eulerAngles = new Vector3 (0.0f, 180, 0.0f);
+				transform.localRotation = rot;
+			} else if (Input.GetAxis ("Horizontal") < 0) {
+				side = -1;
+				Quaternion rot = transform.localRotation;
+				rot.eulerAngles = new Vector3 (0.0f, 0, 0.0f);
+				transform.localRotation = rot;
+			}
 
 		moveDirection = new Vector3 (Input.GetAxis ("Horizontal")*side*-1, 0, 0);
 		moveDirection = transform.TransformDirection (moveDirection);
