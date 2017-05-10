@@ -1,6 +1,8 @@
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2008
 
+Project("{45B96339-7AA4-0D4A-0063-E0D85E4FE7A1}") = "files", "Assembly-CSharp-firstpass.csproj", "{4069B9AA-10F5-E103-A0CA-0DC7A40DE508}"
+EndProject
 Project("{45B96339-7AA4-0D4A-0063-E0D85E4FE7A1}") = "files", "Assembly-CSharp.csproj", "{75C55B4A-5C1A-E349-60CC-8F5B4B91F411}"
 EndProject
 Project("{45B96339-7AA4-0D4A-0063-E0D85E4FE7A1}") = "files", "Assembly-UnityScript.unityproj", "{7E624BC0-7719-832B-575C-C43926AEE1AF}"
@@ -11,6 +13,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4069B9AA-10F5-E103-A0CA-0DC7A40DE508}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4069B9AA-10F5-E103-A0CA-0DC7A40DE508}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4069B9AA-10F5-E103-A0CA-0DC7A40DE508}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4069B9AA-10F5-E103-A0CA-0DC7A40DE508}.Release|Any CPU.Build.0 = Release|Any CPU
 		{75C55B4A-5C1A-E349-60CC-8F5B4B91F411}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{75C55B4A-5C1A-E349-60CC-8F5B4B91F411}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{75C55B4A-5C1A-E349-60CC-8F5B4B91F411}.Release|Any CPU.ActiveCfg = Release|Any CPU

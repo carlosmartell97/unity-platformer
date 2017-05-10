@@ -84,11 +84,13 @@ public class Enemy : MonoBehaviour {
 		else if(current.Name=="chasingCube"){
 			speed=0.12f;
 			Node characterOnNode = GameObject.Find ("Character").GetComponent<mainCharacter> ().characterOnNode;
-			//Debug.Log("character:"+characterOnNode.name+" me:"+mostRecentNode.name);
 			if (mostRecentNode == characterOnNode) {
 				this.transform.LookAt (target.transform.position);
 				this.transform.Translate (transform.forward * speed, Space.World);
 			} else {
+				//Debug.Log (mostRecentNode.name);
+				//Debug.Log (characterOnNode.name);
+
 				path = Pathfinding.aStar(mostRecentNode,characterOnNode);
 				//Debug.Log("PATH:");
 				for(int i=0; i<path.Count; i++){
@@ -126,6 +128,7 @@ public class Enemy : MonoBehaviour {
 	}
 
 	void OnCollisionEnter(Collision c){
+
 		if(target!=null && c.gameObject.name==target.gameObject.name){
 			//Debug.Log("enemy with "+c.gameObject.name);
 
@@ -140,7 +143,6 @@ public class Enemy : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider c){
-		//Debug.Log("enemy on "+c.gameObject.name);
 		//Debug.Log (c.gameObject.layer);
 		if(current.Name=="retrievingCube" && c.gameObject.layer==8){
 			//Debug.Log("c:"+c.gameObject.name+" sb:"+standByNode.gameObject.name);

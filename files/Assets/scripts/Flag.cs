@@ -5,64 +5,49 @@ using UnityEngine.UI;
 
 
 public class Flag : MonoBehaviour {
-	public string newscene;
-
-	private float timer,timerMax;
 	
-	public GameObject winT,wall,redCube,blueCube,greenCube;
+	public GameObject winT,wall,Cube,finisher;
 	public int color;
 	// Use this for initialization
 	void Start () {
-		winT = GameObject.Find("winT");
 		winT.GetComponent<Text> ().enabled = false;
-		timerMax = 3;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
 	}
 
 	void OnTriggerEnter(Collider c){
 		if (c.gameObject.name == "endpoint") {
-			//Destroy (gameObject);
+			Destroy (gameObject);
 			Destroy (wall);
+			Destroy (GameObject.Find ("Enemy"));
 		}
 		//Debug.Log(this.gameObject.name+": "+c.gameObject.name);
 		if(this.gameObject.name=="redF" && c.gameObject.name=="endR"){
 			Destroy (gameObject);
-			Destroy(redCube);
+			Destroy(Cube);
 			if (++mainCharacter.progress == 3) {
 				winT.GetComponent<Text> ().enabled = true;
-				while (timer < timerMax) {
-					timer += Time.deltaTime;
-				
-				}
-				Application.LoadLevel (newscene);
+				finisher.GetComponent<finisher> ().Finish();
+
 			}
 		}
 		else if(this.gameObject.name=="blueF" && c.gameObject.name=="endB"){
 			Destroy (gameObject);
-			Destroy(blueCube);
+			Destroy(Cube);
 			if (++mainCharacter.progress == 3) {
-				
 				winT.GetComponent<Text> ().enabled = true;
-				while (timer < timerMax) {
-					timer += Time.deltaTime;
-				
-				}
-				Application.LoadLevel (newscene);
+				finisher.GetComponent<finisher> ().Finish();
+
 			}
 		}
 		else if(this.gameObject.name=="greenF" && c.gameObject.name=="endG"){
 			Destroy (gameObject);
-			Destroy(greenCube);
+			Destroy(Cube);
 			if (++mainCharacter.progress == 3) {
 				winT.GetComponent<Text> ().enabled = true;
-				while (timer < timerMax) {
-					timer += Time.deltaTime;
-				}
-				Application.LoadLevel (newscene);
+				finisher.GetComponent<finisher> ().Finish();
 			}
 		}
 			

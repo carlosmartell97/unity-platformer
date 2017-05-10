@@ -6,6 +6,7 @@ public class camera : MonoBehaviour {
 
 	public GameObject character;
 	private Vector3 offset;
+	private bool alt;
 
 	// Use this for initialization
 	void Start () {
@@ -13,7 +14,15 @@ public class camera : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		transform.position = character.transform.position+offset;
+	void FixedUpdate () {
+		if (!alt) {
+			transform.position = character.transform.position + offset;
+		} else {
+			transform.position = new Vector3 (-13.2f,-73.48f,-1.9f);
+		}
+	}
+
+	public void Change(){
+		alt = true;
 	}
 }
