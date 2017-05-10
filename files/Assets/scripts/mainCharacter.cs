@@ -7,7 +7,7 @@ public class mainCharacter : MonoBehaviour {
 	public bool grab,movable,enemyA;
 	bool jump, grabavb;
 	public GameObject item=null;
-	public GameObject particle,spawn,spawn2,camera,BossFight;
+	public GameObject particle,spawn,spawn2,camera,bossFight;
 
 	CharacterController controller;
 	int side;
@@ -151,6 +151,7 @@ public class mainCharacter : MonoBehaviour {
 		if (c.gameObject.name == "Btrigger") {
 			camera.GetComponent<camera> ().Change ();
 			spawn = spawn2;
+			bossFight.GetComponent<BossFight> ().Stage ();
 		}
 		/*if (c.gameObject.name == "fwall") {
 			float x = transform.position.x;

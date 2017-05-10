@@ -18,7 +18,7 @@ public class camera : MonoBehaviour {
 		if (!alt) {
 			transform.position = character.transform.position + offset;
 		} else {
-			transform.position = new Vector3 (-13.2f,-73.48f,-1.9f);
+			transform.position = new Vector3 (260f,41.48f,-40f);
 		}
 	}
 
