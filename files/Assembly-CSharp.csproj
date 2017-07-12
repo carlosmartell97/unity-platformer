@@ -46,17 +46,30 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\scripts\AltCam.cs" />
+     <Compile Include="Assets\scripts\Area.cs" />
+     <Compile Include="Assets\scripts\BButton.cs" />
+     <Compile Include="Assets\scripts\BossFight.cs" />
+     <Compile Include="Assets\scripts\Btrigger.cs" />
+     <Compile Include="Assets\scripts\Button.cs" />
      <Compile Include="Assets\scripts\Enemy.cs" />
+     <Compile Include="Assets\scripts\Energyball.cs" />
      <Compile Include="Assets\scripts\Flag.cs" />
+     <Compile Include="Assets\scripts\Floor.cs" />
+     <Compile Include="Assets\scripts\Harraser.cs" />
      <Compile Include="Assets\scripts\Node.cs" />
      <Compile Include="Assets\scripts\Pathfinding.cs" />
      <Compile Include="Assets\scripts\State.cs" />
      <Compile Include="Assets\scripts\Symbol.cs" />
      <Compile Include="Assets\scripts\camera.cs" />
+     <Compile Include="Assets\scripts\finisher.cs" />
      <Compile Include="Assets\scripts\level1mov.cs" />
      <Compile Include="Assets\scripts\mainCharacter.cs" />
+     <Compile Include="Assets\scripts\plate.cs" />
+     <Compile Include="Assets\scripts\plate1.cs" />
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_BloomAndFlares\MobileBloom.shader" />
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\ContrastComposite.shader" />
+     <None Include="Assets\Models\Key\readME keys.txt" />
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_DepthOfField\SeparableBlur.shader" />
  <Reference Include="UnityEngine.Advertisements">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Advertisements/UnityEngine.Advertisements.dll</HintPath>
@@ -82,6 +95,10 @@
  <Reference Include="UnityEngine.VR">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityVR/RuntimeEditor/UnityEngine.VR.dll</HintPath>
  </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
+      <Project>{4069B9AA-10F5-E103-A0CA-0DC7A40DE508}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

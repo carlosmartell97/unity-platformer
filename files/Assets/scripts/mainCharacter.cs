@@ -7,7 +7,7 @@ public class mainCharacter : MonoBehaviour {
 	public bool grab,movable,enemyA;
 	bool jump, grabavb;
 	public GameObject item=null;
-	public GameObject particle;
+	public GameObject particle,spawn,spawn2,camera,bossFight;
 
 	CharacterController controller;
 	int side;
@@ -16,6 +16,7 @@ public class mainCharacter : MonoBehaviour {
 	public float jumpSpeed = 20.0F;
 	public float gravity = 20.0F;
 	private Vector3 moveDirection = Vector3.zero;
+	private Transform cam;
 
 	public static int progress=0;
 	public GameObject enemy;
@@ -32,26 +33,18 @@ public class mainCharacter : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+
 		if (!controller.isGrounded){
-			this.GetComponent<Animation>().CrossFade("Fly");
-			particle.GetComponent<Renderer>().enabled = true;
+			Jetpack ();
 		} else if (Input.GetAxis ("Horizontal") != 0 && controller.isGrounded) {
-			this.GetComponent<Animation>().CrossFade("Walk");
-			particle.GetComponent<Renderer>().enabled = false;
+			Walk ();
 		} else if (Input.GetAxis ("Horizontal")== 0 && controller.isGrounded)  {
-			this.GetComponent<Animation>().CrossFade("Idle");
-			particle.GetComponent<Renderer>().enabled = false;
+			Idle ();
 		}
 		if (Input.GetAxis ("Horizontal") > 0 ) {
-			side = 1;
-			Quaternion rot = transform.localRotation;
- 			rot.eulerAngles = new Vector3 (0.0f, 180, 0.0f);
- 			transform.localRotation = rot;
+			LookRight ();
 		}else if(Input.GetAxis ("Horizontal") < 0){
-			side = -1;
-			Quaternion rot = transform.localRotation;
-			rot.eulerAngles = new Vector3 (0.0f, 0, 0.0f);
-			transform.localRotation = rot;
+			LookLeft ();
 		}
 
 
@@ -84,7 +77,7 @@ public class mainCharacter : MonoBehaviour {
 		}
 
 		if (grab && item!=null) {
-			item.transform.position = new Vector3(transform.position.x+(2*side),transform.position.y+3,transform.position.z);
+			item.transform.position = new Vector3(transform.position.x+(2.8f*side),transform.position.y+2,transform.position.z);
 			if(item!=null && item.name=="Flag" && enemyA){
 				// current = current.ApplaySymbol(cubecarried)
 				GameObject.Find ("Enemy").GetComponent<Enemy> ().current =
@@ -103,12 +96,10 @@ public class mainCharacter : MonoBehaviour {
 				Vector3 point = ray.origin + (ray.direction * distance);    
 				grab = false;
 			    if (point.x >= item.transform.position.x) {
-			    	item.GetComponent<Rigidbody> ().AddForce (15, 20, 0, ForceMode.Impulse);
-
+					item.GetComponent<Rigidbody> ().velocity = new Vector3 (15, 10, 0);
 
 				} else if(point.x < item.transform.position.x)  {
-			    	item.GetComponent<Rigidbody> ().AddForce (-15, 20, 0, ForceMode.Impulse);
-
+					item.GetComponent<Rigidbody> ().velocity = new Vector3 (-15, 10, 0);
 			    }
 			    item = null;
 		   }
@@ -133,19 +124,20 @@ public class mainCharacter : MonoBehaviour {
 		if(c.gameObject.name=="laserShot"){
 			die();
 		}
+
+		if (c.gameObject.name == "Floor (74)") {
+			Destroy (c.gameObject);
+		}
 	}
 
 	void OnCollisionExit(Collision c){
-		if (c.gameObject.name == "Box") {
-			grabavb = false;
-		}
-		if (c.gameObject.name == "Flag") {
+		if (c.gameObject.name == "Box" || c.gameObject.name == "Flag") {
 			grabavb = false;
 		}
 	}
 
 	void die(){
-		this.transform.position = new Vector3 (-37,2,0);
+		this.transform.position = spawn.transform.position;
 	}
 
 	void OnTriggerEnter( Collider c){
@@ -156,8 +148,46 @@ public class mainCharacter : MonoBehaviour {
 		if (c.gameObject.name == "deathZone") {
 			die();
 		}
+		if (c.gameObject.name == "Btrigger") {
+			camera.GetComponent<camera> ().Change ();
+			spawn = spawn2;
+			bossFight.GetComponent<BossFight> ().Stage ();
+		}
+		/*if (c.gameObject.name == "fwall") {
+			float x = transform.position.x;
+			while (transform.position.x > x - 10) {
+				controller.Move (new Vector3 (-1, 0, 0));
+			}
+		}*/
+
 	}
 
+	void Jetpack(){
+		this.GetComponent<Animation>().CrossFade("Fly");
+		particle.GetComponent<Renderer>().enabled = true;
+	}
+	void Walk (){
+		this.GetComponent<Animation>().CrossFade("Walk");
+		particle.GetComponent<Renderer>().enabled = false;
+	}
+	void Idle(){
+		this.GetComponent<Animation>().CrossFade("Idle");
+		particle.GetComponent<Renderer>().enabled = false;
+	}
+
+	void LookRight(){
+		side = 1;
+		Quaternion rot = transform.localRotation;
+		rot.eulerAngles = new Vector3 (0.0f, 180, 0.0f);
+		transform.localRotation = rot;
+	}
+
+	void LookLeft(){
+		side = -1;
+		Quaternion rot = transform.localRotation;
+		rot.eulerAngles = new Vector3 (0.0f, 0, 0.0f);
+		transform.localRotation = rot;
+	}
 
 	public void Movable(){
 		movable = true;
